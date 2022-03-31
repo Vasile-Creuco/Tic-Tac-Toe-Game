@@ -1,0 +1,28 @@
+body {
+	background-color: lightblue;
+}
+
+.card-body {
+	background-color: lightblue;
+}
+
+.game-board {
+	display: grid;
+	grid-template-rows: 100px 100px 100px;
+	grid-template-columns: 100px 100px 100px;
+	justify-content: center;
+}
+
+.cell {
+	background-color: lightblue;
+	border: 3px solid black;
+	display: flex;
+	font-size: 50px;
+	text-align: center;
+	line-height: 95px;
+	align-items: center;
+	justify-content: center;
+	color: darkblue;
+	cursor: pointer;
+	user-select: none;
+}
