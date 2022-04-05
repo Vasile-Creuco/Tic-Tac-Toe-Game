@@ -19,32 +19,24 @@ function resetGame() {
 	document.location.reload();
 }
 
-function displayMessage(player) {
-	document.getElementById('message').innerText = "Player " + player + " won!";
-}
-
 function playerWinner() {
-	winingOptions.forEach(function(options) {
+	winingOptions.forEach(function (options) {
 		let win = options.every(idx => cells[idx].innerText.trim() == currentPlayer);
 		if (win) {
-			displayMessage(currentPlayer);
+			document.getElementById('message').innerText = "Player " + currentPlayer + " won!";
 			++none_winner;
 		}
 	});
 }
 
-function rematch() {
-	document.getElementById('message').innerText = "Rematch";
-}
-
-cells.forEach(function(cell) {
-	cell.addEventListener('click', function() {
+cells.forEach(function (cell) {
+	cell.addEventListener('click', function () {
 		if (cell.innerText.trim() != "") return;
 		cell.innerText = currentPlayer;
 		++equality;
 		playerWinner();
 		if (equality === 9 && none_winner === 0) {
-			rematch();
+			document.getElementById('message').innerText = "Rematch";
 		}
 		currentPlayer = currentPlayer == "X" ? "O" : "X";
 	});
