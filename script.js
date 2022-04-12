@@ -1,8 +1,9 @@
 let cells = document.querySelectorAll(".cell");
 cells = Array.from(cells);
-var currentPlayer = "X";
-var equality = 0;
-var none_winner = 0;
+let currentPlayer = "X";
+let equality = 0;
+let none_winner = 0;
+let win;
 
 var winingOptions = [
 	[0, 1, 2],
@@ -21,20 +22,24 @@ function resetGame() {
 
 function playerWinner() {
 	winingOptions.forEach(function (options) {
-		let win = options.every(idx => cells[idx].innerText.trim() == currentPlayer);
-		if (win) {
-			document.getElementById('message').innerText = "Player " + currentPlayer + " won!";
-			++none_winner;
+		if (options.every(idx => cells[idx].innerText.trim() == currentPlayer)) {
+			win = options.every(idx => cells[idx].innerText.trim() == currentPlayer);
 		}
 	});
+	return win;
 }
 
 cells.forEach(function (cell) {
-	cell.addEventListener('click', function () {
-		if (cell.innerText.trim() != "") return;
+	cell.addEventListener('click', function() {
+		if (cell.innerText.trim() != "") {
+			 return;
+		}
 		cell.innerText = currentPlayer;
 		++equality;
 		playerWinner();
+		if (playerWinner()) {
+			document.getElementById('message').innerText = "Player " + currentPlayer + " won!";
+		}
 		if (equality === 9 && none_winner === 0) {
 			document.getElementById('message').innerText = "Rematch";
 		}
