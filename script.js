@@ -3,7 +3,7 @@ cells = Array.from(cells);
 let currentPlayer = "X";
 let equality = 0;
 let none_winner = 0;
-let win;
+let win = false;
 
 var winingOptions = [
 	[0, 1, 2],
