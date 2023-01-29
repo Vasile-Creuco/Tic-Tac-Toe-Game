@@ -5,6 +5,7 @@ let equality = 0;
 let none_winner = 0;
 let win = false;
 
+//there are multiple options to win
 var winingOptions = [
 	[0, 1, 2],
 	[3, 4, 5],
@@ -15,6 +16,7 @@ var winingOptions = [
 	[0, 4, 8],
 	[2, 4, 6]
 ];
+
 
 function resetGame() {
 	document.location.reload();
