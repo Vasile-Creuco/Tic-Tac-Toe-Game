@@ -19,32 +19,39 @@ var winingOptions = [
 
 
 function resetGame() {
-	document.location.reload();
+	document.location.reload(); // This already resets the game state
+	// Optionally, if you implement a more granular reset logic, ensure to reset the moves count here as well
 }
 
 function playerWinner() {
+	let winnerFound = false;
 	winingOptions.forEach(function (options) {
-		if (options.every(idx => cells[idx].innerText.trim() == currentPlayer)) {
-			win = options.every(idx => cells[idx].innerText.trim() == currentPlayer);
+		if (options.every(idx => cells[idx].innerText.trim() === currentPlayer)) {
+			winnerFound = true;
+			none_winner = 1; // Update none_winner to reflect a winner has been found
+			// Highlight winning cells
+			options.forEach(idx => {
+				cells[idx].classList.add('win-highlight');
+			});
 		}
 	});
-	return win;
+	return winnerFound;
 }
 
 cells.forEach(function (cell) {
 	cell.addEventListener('click', function() {
 		if (cell.innerText.trim() != "") {
-			 return;
+			return;
 		}
 		cell.innerText = currentPlayer;
 		++equality;
-		playerWinner();
 		if (playerWinner()) {
 			document.getElementById('message').innerText = "Player " + currentPlayer + " won!";
-		}
-		if (equality === 9 && none_winner === 0) {
+		} else if (equality === 9 && none_winner === 0) {
 			document.getElementById('message').innerText = "Rematch";
+		} else {
+			currentPlayer = currentPlayer == "X" ? "O" : "X";
 		}
-		currentPlayer = currentPlayer == "X" ? "O" : "X";
+		document.getElementById('movesCount').innerText = "Moves: " + equality; // Update moves count display
 	});
 });
